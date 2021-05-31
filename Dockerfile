@@ -7,6 +7,7 @@ RUN apt-get update \
   && apt-get install -qq -y --no-install-recommends \
     build-essential \
     curl \
+    git-core \
     libpq-dev
 
 # Install Dockerize
