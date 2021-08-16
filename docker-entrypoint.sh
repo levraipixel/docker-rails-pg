@@ -3,6 +3,12 @@ set -euo pipefail
 
 rm -rf tmp/pids
 
+DO_RUN_BUNDLE_INSTALL=${RUN_BUNDLE_INSTALL:0}
+if [ $DO_RUN_BUNDLE_INSTALL -eq 1 ]; then
+  echo "Running bundle install to update Gemfile.lock"
+  bundle install --quiet
+fi
+
 # parse DATABASE_URL
 proto="$(echo $DATABASE_URL | grep :// | sed -e's,^\(.*://\).*,\1,g')"
 url="$(echo ${DATABASE_URL/$proto/})"
@@ -16,7 +22,7 @@ dockerize -wait tcp://$host:$port -timeout 1m
 
 DO_RUN_DB_MIGRATE=${RUN_DB_MIGRATE:-1}
 if [ $DO_RUN_DB_MIGRATE -ne 0 ]; then
-  echo "Running migrations..."
+  echo "Running DB migrations"
   bundle exec rails db:migrate
 fi
 
