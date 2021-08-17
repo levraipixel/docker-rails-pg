@@ -3,7 +3,7 @@ set -euo pipefail
 
 rm -rf tmp/pids
 
-DO_RUN_BUNDLE_INSTALL=${RUN_BUNDLE_INSTALL:-1}
+DO_RUN_BUNDLE_INSTALL=${RUN_BUNDLE_INSTALL:-0}
 if [ $DO_RUN_BUNDLE_INSTALL -eq 1 ]; then
   echo "Running bundle install to update Gemfile.lock"
   bundle install --quiet
