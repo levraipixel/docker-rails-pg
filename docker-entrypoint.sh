@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+mkdir -p tmp
 rm -rf tmp/pids
 
 DO_RUN_BUNDLE_INSTALL=${RUN_BUNDLE_INSTALL:-0}
